@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Cat Breeds</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_menu">Search</string>
+    <string name="favorites_menu">Favorites</string>
+    <string name="cat_breed_name">Cat Breed Name</string>
+    <string name="rating_star">Rating Star</string>
+    <string name="origin">Origin:</string>
+    <string name="life_span">Life Span:</string>
+    <string name="temperament"><![CDATA[<b>Tempermanet</b>]]>:  %s</string>
+    <string name="child_friendly">Child Friendly:</string>
+    <string name="dog_friendly">Dog Friendly:</string>
+    <string name="imperial_weight">Imperial(Weight):</string>
+    <string name="metric_weight">Metric(Weight):</string>
+    <string name="wikipedia">Wikipedia:</string>
+</resources>

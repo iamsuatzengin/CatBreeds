@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="cat"
+            type="com.suatzengin.catbreeds.domain.model.CatBreed" />
+
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.cat_detail.CatBreedDetailFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/cat_image"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                app:imageUrl="@{cat.image.url}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvCatBreedDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:gravity="start"
+                android:padding="2dp"
+                android:text="@{cat.description}"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cat_image"
+                tools:text="Cat Breed Description" />
+
+            <TextView
+                android:id="@+id/tvOrigin"
+                style="@style/TextAppearance.Material3.TitleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:gravity="start"
+                android:padding="2dp"
+                android:text="@string/origin"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvCatBreedDescription" />
+
+            <TextView
+                android:id="@+id/tvCatOrigin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:padding="2dp"
+                android:text="@{cat.origin}"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toEndOf="@id/tvOrigin"
+                app:layout_constraintTop_toBottomOf="@id/tvCatBreedDescription"
+                tools:text="Bengal" />
+
+            <TextView
+                android:id="@+id/tvLifeSpan"
+                style="@style/TextAppearance.Material3.TitleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:gravity="start"
+                android:padding="2dp"
+                android:text="@string/life_span"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvOrigin" />
+
+            <TextView
+                android:id="@+id/tvCatLifeSpan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:padding="2dp"
+                android:text="@{cat.lifeSpan}"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toEndOf="@id/tvLifeSpan"
+                app:layout_constraintTop_toBottomOf="@id/tvOrigin"
+                tools:text="12 - 14 years" />
+
+            <TextView
+                android:id="@+id/tvTemperament"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:gravity="start"
+                android:padding="2dp"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvLifeSpan"
+                tools:text="Tempreament:" />
+
+            <TextView
+                android:id="@+id/tvChildFriendly"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:gravity="start"
+                style="@style/TextAppearance.Material3.TitleSmall"
+                android:padding="2dp"
+                android:text="@string/child_friendly"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvTemperament" />
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:isIndicator="true"
+                android:numStars="5"
+                android:theme="@style/customRatingBar"
+                style="@style/Widget.AppCompat.RatingBar.Indicator"
+                android:scaleX=".8"
+                android:scaleY=".8"
+                app:useMaterialThemeColors="false"
+                android:rating="@{cat.childFriendly}"
+                android:gravity="start"
+                app:layout_constraintStart_toEndOf="@id/tvChildFriendly"
+                app:layout_constraintTop_toBottomOf="@id/tvTemperament" />
+
+            <TextView
+                android:id="@+id/tvDogFriendly"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:gravity="start"
+                style="@style/TextAppearance.Material3.TitleSmall"
+                android:padding="2dp"
+                android:text="@string/dog_friendly"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvChildFriendly" />
+
+            <RatingBar
+                android:id="@+id/ratingBarDogFriendly"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:isIndicator="true"
+                android:numStars="5"
+                style="@style/Widget.AppCompat.RatingBar.Indicator"
+                android:rating="@{cat.dogFriendly}"
+                app:useMaterialThemeColors="false"
+                android:gravity="start"
+                android:scaleX=".8"
+                android:scaleY=".8"
+                android:theme="@style/customRatingBar"
+                app:layout_constraintStart_toEndOf="@id/tvDogFriendly"
+                app:layout_constraintTop_toBottomOf="@id/tvChildFriendly" />
+            <TextView
+                android:id="@+id/tvImperialWeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:padding="2dp"
+                android:text="@string/imperial_weight"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvDogFriendly" />
+
+            <TextView
+                android:id="@+id/tvCatImperialWeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:padding="2dp"
+                android:text="@{cat.weight.imperial.toString()}"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toEndOf="@id/tvImperialWeight"
+                app:layout_constraintTop_toBottomOf="@id/tvDogFriendly" />
+
+            <TextView
+                android:id="@+id/tvMetricWeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:padding="2dp"
+                android:text="@string/metric_weight"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvImperialWeight" />
+
+            <TextView
+                android:id="@+id/tvCatMetricWeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:padding="2dp"
+                android:text="@{cat.weight.metric.toString()}"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toEndOf="@id/tvMetricWeight"
+                app:layout_constraintTop_toBottomOf="@id/tvImperialWeight" />
+
+            <TextView
+                android:id="@+id/tvWikipediaUrl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:padding="2dp"
+                android:text="@string/wikipedia"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvMetricWeight" />
+
+            <TextView
+                android:id="@+id/tvCatWikipediaUrl"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="start"
+                android:padding="2dp"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvWikipediaUrl"
+                app:layout_constraintTop_toBottomOf="@id/tvMetricWeight"
+                app:underline="@{cat}" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

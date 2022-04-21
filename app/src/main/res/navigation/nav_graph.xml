@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/catBreedListFragment">
+
+    <fragment
+        android:id="@+id/catBreedListFragment"
+        android:name="com.suatzengin.catbreeds.presentation.cat_list.CatBreedListFragment"
+        android:label="Cat Breeds"
+        tools:layout="@layout/fragment_cat_breed_list" >
+        <action
+            android:id="@+id/listToDetail"
+            app:destination="@id/catBreedDetailFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"
+            />
+        <action
+            android:id="@+id/listToFavorites"
+            app:destination="@id/favoritesFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/catBreedDetailFragment"
+        android:name="com.suatzengin.catbreeds.presentation.cat_detail.CatBreedDetailFragment"
+        android:label="CatBreedDetailFragment"
+        tools:layout="@layout/fragment_cat_breed_detail"
+        >
+        <argument
+            android:name="cat"
+            app:argType="com.suatzengin.catbreeds.domain.model.CatBreed" />
+        <action
+            android:id="@+id/detailToWebView"
+            app:destination="@id/webViewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/webViewFragment"
+        android:name="com.suatzengin.catbreeds.presentation.webView.WebViewFragment"
+        android:label="Cat Wikipedia"
+        tools:layout="@layout/fragment_web_view" >
+        <argument
+            android:name="cat_web_view"
+            app:argType="com.suatzengin.catbreeds.domain.model.CatBreed"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.suatzengin.catbreeds.presentation.favorites.FavoritesFragment"
+        android:label="FavoritesFragment" />
+</navigation>

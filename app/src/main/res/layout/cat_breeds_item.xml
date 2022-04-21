@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="cat_breed"
+            type="com.suatzengin.catbreeds.domain.model.CatBreed" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/item_row"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@drawable/item_background"
+        android:padding="4dp"
+        app:sendDataToDetailFragment="@{cat_breed}">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/cat_imageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:scaleType="centerCrop"
+            app:imageUrl="@{cat_breed.image.url}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:riv_corner_radius="5dip"
+            app:riv_mutate_background="true"
+            app:riv_oval="false"
+            app:riv_tile_mode="repeat" />
+
+        <TextView
+            android:id="@+id/tv_breed"
+            style="@style/TextAppearance.AppCompat.Body2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@{cat_breed.name}"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/cat_imageView"
+            app:layout_constraintEnd_toStartOf="@+id/favorite"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/cat_imageView"
+            app:layout_constraintTop_toTopOf="@+id/cat_imageView"
+            tools:text="cat breed name" />
+
+
+        <CheckBox
+            android:id="@+id/favorite"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="8dp"
+            android:button="@drawable/selector_favorites_list"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_breed"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:isChecked="@{cat_breed}"
+            app:layout_constraintTop_toTopOf="@+id/tv_breed"
+            app:useMaterialThemeColors="false" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+
+    <!--#00ffffff -->
