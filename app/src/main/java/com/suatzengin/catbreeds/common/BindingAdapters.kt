@@ -38,14 +38,12 @@ fun sendDataToDetailFragment(view: ConstraintLayout, catBreed: CatBreed) {
         view.findNavController().navigate(action)
     }
 }
-
+/*
 @BindingAdapter("isChecked")
-fun isChecked(checkBox: CheckBox, catBreed: CatBreed) {
-    checkBox.setOnClickListener {
-        checkBox.isChecked = catBreed.isFavorited
-    }
+fun isChecked(checkBox: CheckBox, isFavorited: Boolean) {
+    checkBox.isChecked = isFavorited
 }
-
+*/
 @BindingAdapter("underline")
 fun underlineForWikiUrl(textView: TextView, catBreed: CatBreed) {
     textView.paintFlags = textView.paintFlags or Paint.UNDERLINE_TEXT_FLAG

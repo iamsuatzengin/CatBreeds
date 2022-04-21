@@ -1,4 +1,9 @@
 package com.suatzengin.catbreeds.data.local
 
-abstract class FavoritesDatabase {
+import androidx.room.Database
+import androidx.room.RoomDatabase
+
+@Database(entities = [FavoritesModel::class], version = 1, exportSchema = false)
+abstract class FavoritesDatabase : RoomDatabase() {
+    abstract fun favoritesDao(): FavoritesDao
 }

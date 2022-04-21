@@ -10,8 +10,9 @@ import androidx.core.text.HtmlCompat
 import androidx.navigation.fragment.navArgs
 import com.suatzengin.catbreeds.R
 import com.suatzengin.catbreeds.databinding.FragmentCatBreedDetailBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class CatBreedDetailFragment : Fragment() {
     private var _binding: FragmentCatBreedDetailBinding? = null
     private val binding get() = _binding!!

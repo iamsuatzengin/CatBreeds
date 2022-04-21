@@ -9,9 +9,21 @@ import com.suatzengin.catbreeds.domain.model.CatBreed
 class CatBreedListViewHolder(
     private val binding: CatBreedsItemBinding
 ) : RecyclerView.ViewHolder(binding.root) {
-    fun bind(catBreed: CatBreed) {
+    fun bind(catBreed: CatBreed, onClickFav: (CatBreed) -> Unit) {
         binding.catBreed = catBreed
+
+        binding.favorite.setOnClickListener {
+            if(binding.favorite.isChecked){
+                catBreed.isFavorited = true
+                onClickFav(catBreed)
+            }else{
+                catBreed.isFavorited = false
+            }
+        }
+
         binding.executePendingBindings()
+
+
     }
 
     companion object {

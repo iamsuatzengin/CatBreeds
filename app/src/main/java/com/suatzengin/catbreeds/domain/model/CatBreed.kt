@@ -1,6 +1,7 @@
 package com.suatzengin.catbreeds.domain.model
 
 import android.os.Parcelable
+import com.suatzengin.catbreeds.data.local.FavoritesModel
 import com.suatzengin.catbreeds.data.remote.dto.Image
 import com.suatzengin.catbreeds.data.remote.dto.Weight
 import kotlinx.parcelize.Parcelize
@@ -20,4 +21,23 @@ data class CatBreed(
     val origin: String?,
     var isFavorited: Boolean = false,
     val referenceImageId: String?,
-): Parcelable
+) : Parcelable
+
+fun CatBreed.toFavoriteModel(): FavoritesModel{
+    return FavoritesModel(
+        id = id!!,
+        name = name,
+        imageUrl = image?.url,
+        description = description,
+        wikipediaUrl = wikipediaUrl,
+        imperialWeight = weight?.imperial,
+        metricWeight = weight?.metric,
+        temperament = temperament,
+        childFriendly = childFriendly,
+        dogFriendly = dogFriendly,
+        lifeSpan = lifeSpan,
+        origin = origin,
+        isFavorited = isFavorited,
+        referenceImageId = referenceImageId
+    )
+}

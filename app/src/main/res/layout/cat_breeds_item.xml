@@ -61,7 +61,6 @@
             android:button="@drawable/selector_favorites_list"
             app:layout_constraintBottom_toBottomOf="@+id/tv_breed"
             app:layout_constraintEnd_toEndOf="parent"
-            app:isChecked="@{cat_breed}"
             app:layout_constraintTop_toTopOf="@+id/tv_breed"
             app:useMaterialThemeColors="false" />
     </androidx.constraintlayout.widget.ConstraintLayout>

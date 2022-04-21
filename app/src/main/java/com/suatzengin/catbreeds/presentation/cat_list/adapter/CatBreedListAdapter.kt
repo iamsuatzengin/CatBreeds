@@ -5,7 +5,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.suatzengin.catbreeds.domain.model.CatBreed
 
-class CatBreedListAdapter: ListAdapter<CatBreed, CatBreedListViewHolder>(DiffCallBack) {
+class CatBreedListAdapter(
+    private val onClickFav: (CatBreed) -> Unit
+): ListAdapter<CatBreed, CatBreedListViewHolder>(DiffCallBack) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CatBreedListViewHolder {
@@ -14,7 +16,7 @@ class CatBreedListAdapter: ListAdapter<CatBreed, CatBreedListViewHolder>(DiffCal
 
     override fun onBindViewHolder(holder: CatBreedListViewHolder, position: Int) {
         val catBreed = getItem(position)
-        holder.bind(catBreed)
+        holder.bind(catBreed, onClickFav)
     }
 
     companion object DiffCallBack : DiffUtil.ItemCallback<CatBreed>() {

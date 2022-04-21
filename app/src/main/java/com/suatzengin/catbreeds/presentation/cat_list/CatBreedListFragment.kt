@@ -13,8 +13,12 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.suatzengin.catbreeds.R
+import com.suatzengin.catbreeds.data.local.FavoritesModel
 import com.suatzengin.catbreeds.databinding.FragmentCatBreedListBinding
+import com.suatzengin.catbreeds.domain.model.CatBreed
+import com.suatzengin.catbreeds.domain.model.toFavoriteModel
 import com.suatzengin.catbreeds.presentation.cat_list.adapter.CatBreedListAdapter
+import com.suatzengin.catbreeds.presentation.favorites.FavoritesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -23,16 +27,18 @@ class CatBreedListFragment : Fragment(), SearchView.OnQueryTextListener {
     private var _binding: FragmentCatBreedListBinding? = null
     private val binding get() = _binding!!
 
-    private val adapter: CatBreedListAdapter by lazy { CatBreedListAdapter() }
+    private lateinit var adapter: CatBreedListAdapter
 
     private val viewModel: CatBreedListViewModel by viewModels()
-
+    private val favoritesViewModel: FavoritesViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentCatBreedListBinding.inflate(inflater, container, false)
-
+        adapter = CatBreedListAdapter { cat ->
+            onClickFavoriteButton(cat)
+        }
         setupRecyclerView()
         observeData()
 
@@ -41,7 +47,13 @@ class CatBreedListFragment : Fragment(), SearchView.OnQueryTextListener {
         return binding.root
     }
 
-    private fun searchCatBreed(catBreed: String){
+    private fun onClickFavoriteButton(cat: CatBreed) {
+        val favoriteItem = cat.toFavoriteModel()
+        favoritesViewModel.addToFavorites(favoriteItem)
+        Toast.makeText(requireContext(), "eklendi ${favoriteItem.name}", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun searchCatBreed(catBreed: String) {
         // hatalı -> arama yapınca listedeki itemlerin resimleri gelmiyor.
         viewModel.searchCatBreed(catBreed)
         viewModel.searchState.observe(viewLifecycleOwner, Observer {
@@ -50,21 +62,21 @@ class CatBreedListFragment : Fragment(), SearchView.OnQueryTextListener {
         })
     }
 
-    private fun observeData(){
+    private fun observeData() {
         lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
-                viewModel.state.collect{ state ->
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.state.collect { state ->
                     state.catBreeds.let { list ->
                         adapter.submitList(list)
                     }
                     state.isLoading.let { boolean ->
-                        if(boolean){
+                        if (boolean) {
                             binding.progressBarForList.visibility = View.VISIBLE
-                        }else{
+                        } else {
                             binding.progressBarForList.visibility = View.GONE
                         }
                     }
-                    if(state.error.isNotBlank()){
+                    if (state.error.isNotBlank()) {
                         Toast.makeText(requireContext(), state.error, Toast.LENGTH_SHORT).show()
                     }
                 }
@@ -72,7 +84,7 @@ class CatBreedListFragment : Fragment(), SearchView.OnQueryTextListener {
         }
     }
 
-    private fun setupRecyclerView(){
+    private fun setupRecyclerView() {
         val recyclerView = binding.rvCatBreeds
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -88,25 +100,26 @@ class CatBreedListFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
+        when (item.itemId) {
             R.id.menu_favorites -> actionListToFavorites()
         }
         return super.onOptionsItemSelected(item)
     }
-    private fun actionListToFavorites(){
+
+    private fun actionListToFavorites() {
         val action = CatBreedListFragmentDirections.listToFavorites()
         findNavController().navigate(action)
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
-        if(query != null){
+        if (query != null) {
             //searchCatBreed(query)
         }
         return true
     }
 
     override fun onQueryTextChange(query: String?): Boolean {
-        if(query != null){
+        if (query != null) {
             //searchCatBreed(query)
         }
         return true
