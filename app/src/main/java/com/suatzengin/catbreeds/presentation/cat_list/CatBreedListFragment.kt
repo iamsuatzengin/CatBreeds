@@ -18,6 +18,7 @@ import com.suatzengin.catbreeds.databinding.FragmentCatBreedListBinding
 import com.suatzengin.catbreeds.domain.model.CatBreed
 import com.suatzengin.catbreeds.domain.model.toFavoriteModel
 import com.suatzengin.catbreeds.presentation.cat_list.adapter.CatBreedListAdapter
+import com.suatzengin.catbreeds.presentation.favorites.FavoritesEvent
 import com.suatzengin.catbreeds.presentation.favorites.FavoritesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -36,9 +37,12 @@ class CatBreedListFragment : Fragment(), SearchView.OnQueryTextListener {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentCatBreedListBinding.inflate(inflater, container, false)
-        adapter = CatBreedListAdapter { cat ->
+        adapter = CatBreedListAdapter( { cat ->
             onClickFavoriteButton(cat)
-        }
+        }, { cat ->
+            onClickDeleteFavorite(cat)
+        })
+
         setupRecyclerView()
         observeData()
 
@@ -47,9 +51,14 @@ class CatBreedListFragment : Fragment(), SearchView.OnQueryTextListener {
         return binding.root
     }
 
+    private fun onClickDeleteFavorite(cat: CatBreed) {
+        val deletedItem = cat.toFavoriteModel()
+        favoritesViewModel.handleEvent(FavoritesEvent.DeleteCatFromFavorites(deletedItem))
+    }
+
     private fun onClickFavoriteButton(cat: CatBreed) {
         val favoriteItem = cat.toFavoriteModel()
-        favoritesViewModel.addToFavorites(favoriteItem)
+        favoritesViewModel.handleEvent(FavoritesEvent.AddToFavorites(favoriteItem))
         Toast.makeText(requireContext(), "eklendi ${favoriteItem.name}", Toast.LENGTH_SHORT).show()
     }
 

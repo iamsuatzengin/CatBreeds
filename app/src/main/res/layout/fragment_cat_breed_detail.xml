@@ -8,7 +8,9 @@
         <variable
             name="cat"
             type="com.suatzengin.catbreeds.domain.model.CatBreed" />
-
+        <variable
+            name="favorite"
+            type="com.suatzengin.catbreeds.data.local.FavoritesModel" />
     </data>
 
     <ScrollView

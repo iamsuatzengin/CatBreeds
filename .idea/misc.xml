@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Suat/Desktop/CatBreeds/app/src/main/res/drawable-v24/ic_no_data.xml" value="0.154" />
         <entry key="..\:/Users/Suat/Desktop/CatBreeds/app/src/main/res/drawable/ic_broken_image.xml" value="0.1435" />
         <entry key="..\:/Users/Suat/Desktop/CatBreeds/app/src/main/res/drawable/ic_outline_star.xml" value="0.24" />
         <entry key="..\:/Users/Suat/Desktop/CatBreeds/app/src/main/res/drawable/ic_star_selected.xml" value="0.24" />
@@ -12,6 +13,7 @@
         <entry key="..\:/Users/Suat/Desktop/CatBreeds/app/src/main/res/drawable/selector_favorites_list.xml" value="0.236" />
         <entry key="..\:/Users/Suat/Desktop/CatBreeds/app/src/main/res/layout/activity_main.xml" value="0.23703703703703705" />
         <entry key="..\:/Users/Suat/Desktop/CatBreeds/app/src/main/res/layout/cat_breeds_item.xml" value="0.33" />
+        <entry key="..\:/Users/Suat/Desktop/CatBreeds/app/src/main/res/layout/favorites_item.xml" value="0.33" />
         <entry key="..\:/Users/Suat/Desktop/CatBreeds/app/src/main/res/layout/fragment_cat_breed_detail.xml" value="0.33" />
         <entry key="..\:/Users/Suat/Desktop/CatBreeds/app/src/main/res/layout/fragment_cat_breed_list.xml" value="0.35885416666666664" />
         <entry key="..\:/Users/Suat/Desktop/CatBreeds/app/src/main/res/layout/fragment_favorites.xml" value="0.35885416666666664" />

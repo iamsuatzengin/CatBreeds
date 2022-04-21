@@ -14,4 +14,5 @@
     <string name="imperial_weight">Imperial(Weight):</string>
     <string name="metric_weight">Metric(Weight):</string>
     <string name="wikipedia">Wikipedia:</string>
+    <string name="no_data">You don\'t have any cat breed in favorites!</string>
 </resources>

@@ -5,7 +5,7 @@ import com.suatzengin.catbreeds.domain.repository.CatBreedsRepository
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class GettAllUseCase @Inject constructor(
+class GetAllUseCase @Inject constructor(
     private val repository: CatBreedsRepository
 ) {
     operator fun invoke() = flow {

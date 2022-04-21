@@ -1,7 +1,6 @@
 package com.suatzengin.catbreeds.common
 
 import android.graphics.Paint
-import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -11,9 +10,11 @@ import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.suatzengin.catbreeds.R
+import com.suatzengin.catbreeds.data.local.FavoritesModel
 import com.suatzengin.catbreeds.domain.model.CatBreed
 import com.suatzengin.catbreeds.presentation.cat_detail.CatBreedDetailFragmentDirections
 import com.suatzengin.catbreeds.presentation.cat_list.CatBreedListFragmentDirections
+import com.suatzengin.catbreeds.presentation.favorites.FavoritesFragmentDirections
 
 @BindingAdapter("imageUrl")
 fun bindImage(imageView: ImageView, imgUrl: String?) {
@@ -34,10 +35,11 @@ fun bindImage(imageView: ImageView, imgUrl: String?) {
 @BindingAdapter("sendDataToDetailFragment")
 fun sendDataToDetailFragment(view: ConstraintLayout, catBreed: CatBreed) {
     view.setOnClickListener {
-        val action = CatBreedListFragmentDirections.listToDetail(catBreed)
+        val action = CatBreedListFragmentDirections.listToDetail(cat = catBreed)
         view.findNavController().navigate(action)
     }
 }
+
 /*
 @BindingAdapter("isChecked")
 fun isChecked(checkBox: CheckBox, isFavorited: Boolean) {
@@ -45,18 +47,24 @@ fun isChecked(checkBox: CheckBox, isFavorited: Boolean) {
 }
 */
 @BindingAdapter("underline")
-fun underlineForWikiUrl(textView: TextView, catBreed: CatBreed) {
+fun underlineForWikiUrl(textView: TextView, cat: CatBreed) {
     textView.paintFlags = textView.paintFlags or Paint.UNDERLINE_TEXT_FLAG
-    if (catBreed.wikipediaUrl.isNullOrEmpty()) {
+    if (cat.wikipediaUrl.isNullOrEmpty()) {
         textView.text = "No Link"
         textView.isClickable = false
     } else {
-        textView.text = catBreed.wikipediaUrl
+        textView.text = cat.wikipediaUrl
         textView.setOnClickListener {
-            val action = CatBreedDetailFragmentDirections.detailToWebView(catBreed)
+            val action = CatBreedDetailFragmentDirections.detailToWebView(cat)
             textView.findNavController().navigate(action)
         }
     }
+}
 
-
+@BindingAdapter("sendDataFromFavoritesToDetail")
+fun sendDataFromFavoritesToDetail(view: ConstraintLayout, favoritesModel: FavoritesModel) {
+    view.setOnClickListener {
+        val action = FavoritesFragmentDirections.favoritesToDetail(favorites = favoritesModel)
+        view.findNavController().navigate(action)
+    }
 }
