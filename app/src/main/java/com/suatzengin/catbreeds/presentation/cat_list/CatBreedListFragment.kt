@@ -13,10 +13,8 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.suatzengin.catbreeds.R
-import com.suatzengin.catbreeds.data.local.FavoritesModel
 import com.suatzengin.catbreeds.databinding.FragmentCatBreedListBinding
 import com.suatzengin.catbreeds.domain.model.CatBreed
-import com.suatzengin.catbreeds.domain.model.toFavoriteModel
 import com.suatzengin.catbreeds.presentation.cat_list.adapter.CatBreedListAdapter
 import com.suatzengin.catbreeds.presentation.favorites.FavoritesEvent
 import com.suatzengin.catbreeds.presentation.favorites.FavoritesViewModel
@@ -52,14 +50,12 @@ class CatBreedListFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     private fun onClickDeleteFavorite(cat: CatBreed) {
-        val deletedItem = cat.toFavoriteModel()
-        favoritesViewModel.handleEvent(FavoritesEvent.DeleteCatFromFavorites(deletedItem))
+        favoritesViewModel.handleEvent(FavoritesEvent.DeleteCatFromFavorites(cat))
     }
 
     private fun onClickFavoriteButton(cat: CatBreed) {
-        val favoriteItem = cat.toFavoriteModel()
-        favoritesViewModel.handleEvent(FavoritesEvent.AddToFavorites(favoriteItem))
-        Toast.makeText(requireContext(), "eklendi ${favoriteItem.name}", Toast.LENGTH_SHORT).show()
+        favoritesViewModel.handleEvent(FavoritesEvent.AddToFavorites(cat))
+        Toast.makeText(requireContext(), "eklendi ${cat.name}", Toast.LENGTH_SHORT).show()
     }
 
     private fun searchCatBreed(catBreed: String) {
@@ -69,6 +65,18 @@ class CatBreedListFragment : Fragment(), SearchView.OnQueryTextListener {
             adapter.submitList(it)
 
         })
+    }
+
+    private fun favorited(){
+        lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
+                favoritesViewModel.stateFavorites.collect{state ->
+                    state.favoriteList.let { list ->
+
+                    }
+                }
+            }
+        }
     }
 
     private fun observeData() {

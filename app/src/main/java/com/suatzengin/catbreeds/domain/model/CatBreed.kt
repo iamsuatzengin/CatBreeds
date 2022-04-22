@@ -1,19 +1,20 @@
 package com.suatzengin.catbreeds.domain.model
 
 import android.os.Parcelable
-import com.suatzengin.catbreeds.data.local.FavoritesModel
-import com.suatzengin.catbreeds.data.remote.dto.Image
-import com.suatzengin.catbreeds.data.remote.dto.Weight
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
+@Entity(tableName = "favorites")
 data class CatBreed(
-    val id: String?,
+    @PrimaryKey(autoGenerate = false) val id: String,
     val name: String?,
-    val image: Image?,
+    val imageUrl: String?,
     val description: String?,
     val wikipediaUrl: String?,
-    val weight: Weight?,
+    val imperialWeight: String?,
+    val metricWeight: String?,
     val temperament: String?,
     val childFriendly: Int?,
     val dogFriendly: Int?,
@@ -22,22 +23,3 @@ data class CatBreed(
     var isFavorited: Boolean = false,
     val referenceImageId: String?,
 ) : Parcelable
-
-fun CatBreed.toFavoriteModel(): FavoritesModel{
-    return FavoritesModel(
-        id = id!!,
-        name = name,
-        imageUrl = image?.url,
-        description = description,
-        wikipediaUrl = wikipediaUrl,
-        imperialWeight = weight?.imperial,
-        metricWeight = weight?.metric,
-        temperament = temperament,
-        childFriendly = childFriendly,
-        dogFriendly = dogFriendly,
-        lifeSpan = lifeSpan,
-        origin = origin,
-        isFavorited = isFavorited,
-        referenceImageId = referenceImageId
-    )
-}

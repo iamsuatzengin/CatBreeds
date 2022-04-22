@@ -1,7 +1,8 @@
 package com.suatzengin.catbreeds.domain.repository
 
-import com.suatzengin.catbreeds.data.local.FavoritesModel
+
 import com.suatzengin.catbreeds.data.remote.dto.CatBreedDto
+import com.suatzengin.catbreeds.domain.model.CatBreed
 
 interface CatBreedsRepository {
 
@@ -9,11 +10,11 @@ interface CatBreedsRepository {
 
     suspend fun searchCatBreed(cat: String): List<CatBreedDto>
 
-    suspend fun insert(cat: FavoritesModel)
+    suspend fun insert(cat: CatBreed)
 
-    suspend fun delete(cat: FavoritesModel)
+    suspend fun delete(cat: CatBreed)
 
-    fun getFavorites(): List<FavoritesModel>
+    fun getFavorites(): List<CatBreed>
 
-    fun getFavoriteById(id: Int): FavoritesModel
+    fun getFavoriteById(id: Int): CatBreed
 }

@@ -8,9 +8,7 @@
         <variable
             name="cat"
             type="com.suatzengin.catbreeds.domain.model.CatBreed" />
-        <variable
-            name="favorite"
-            type="com.suatzengin.catbreeds.data.local.FavoritesModel" />
+
     </data>
 
     <ScrollView
@@ -28,7 +26,7 @@
                 android:layout_height="300dp"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
-                app:imageUrl="@{cat.image.url}"
+                app:imageUrl="@{cat.imageUrl}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -187,7 +185,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:padding="2dp"
-                android:text="@{cat.weight.imperial.toString()}"
+                android:text="@{cat.imperialWeight.toString()}"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toEndOf="@id/tvImperialWeight"
                 app:layout_constraintTop_toBottomOf="@id/tvDogFriendly" />
@@ -210,7 +208,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:padding="2dp"
-                android:text="@{cat.weight.metric.toString()}"
+                android:text="@{cat.metricWeight.toString()}"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toEndOf="@id/tvMetricWeight"
                 app:layout_constraintTop_toBottomOf="@id/tvImperialWeight" />

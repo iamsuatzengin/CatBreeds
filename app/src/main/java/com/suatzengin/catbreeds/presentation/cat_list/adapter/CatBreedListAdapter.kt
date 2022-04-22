@@ -7,7 +7,8 @@ import com.suatzengin.catbreeds.domain.model.CatBreed
 
 class CatBreedListAdapter(
     private val onClickFav: (CatBreed) -> Unit,
-    private val onClickDeleteFav: (CatBreed) -> Unit
+    private val onClickDeleteFav: (CatBreed) -> Unit,
+
 ): ListAdapter<CatBreed, CatBreedListViewHolder>(DiffCallBack) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CatBreedListViewHolder {

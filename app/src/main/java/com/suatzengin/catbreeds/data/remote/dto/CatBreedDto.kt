@@ -64,12 +64,13 @@ data class CatBreedDto(
 
 fun CatBreedDto.toCatBreed(): CatBreed {
     return CatBreed(
-        id = id,
+        id = id!!,
         name = name,
-        image = image,
+        imageUrl = image?.url,
         description = description,
         wikipediaUrl = wikipediaUrl,
-        weight = weight,
+        imperialWeight = weight?.imperial,
+        metricWeight = weight?.metric,
         temperament = temperament,
         childFriendly = childFriendly,
         dogFriendly = dogFriendly,

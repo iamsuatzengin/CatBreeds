@@ -9,18 +9,29 @@ import com.suatzengin.catbreeds.domain.model.CatBreed
 class CatBreedListViewHolder(
     private val binding: CatBreedsItemBinding
 ) : RecyclerView.ViewHolder(binding.root) {
-    fun bind(catBreed: CatBreed, onClickFav: (CatBreed) -> Unit, onClickDeleteFav: (CatBreed) -> Unit) {
+    fun bind(
+        catBreed: CatBreed,
+        onClickFav: (CatBreed) -> Unit,
+        onClickDeleteFav: (CatBreed) -> Unit,
+
+    ) {
         binding.catBreed = catBreed
-        binding.favorite.setOnClickListener {
-            if (binding.favorite.isChecked) {
-                catBreed.isFavorited = true
-                onClickFav(catBreed)
-            } else {
-                catBreed.isFavorited = false
-                onClickDeleteFav(catBreed)
+
+
+        binding.favorite.apply {
+            setOnClickListener {
+                if (isChecked) {
+                    catBreed.isFavorited = true
+                    onClickFav(catBreed)
+                } else {
+                    catBreed.isFavorited = false
+                    onClickDeleteFav(catBreed)
+                }
             }
         }
-        binding.favorite.isChecked = catBreed.isFavorited
+
+
+
         binding.executePendingBindings()
     }
 

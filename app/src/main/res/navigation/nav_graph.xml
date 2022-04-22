@@ -38,11 +38,7 @@
         <action
             android:id="@+id/detailToWebView"
             app:destination="@id/webViewFragment" />
-        <argument
-            android:name="favorites"
-            android:defaultValue="@null"
-            app:argType="com.suatzengin.catbreeds.data.local.FavoritesModel"
-            app:nullable="true" />
+
     </fragment>
     <fragment
         android:id="@+id/webViewFragment"

@@ -10,7 +10,6 @@ import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.suatzengin.catbreeds.R
-import com.suatzengin.catbreeds.data.local.FavoritesModel
 import com.suatzengin.catbreeds.domain.model.CatBreed
 import com.suatzengin.catbreeds.presentation.cat_detail.CatBreedDetailFragmentDirections
 import com.suatzengin.catbreeds.presentation.cat_list.CatBreedListFragmentDirections
@@ -62,9 +61,9 @@ fun underlineForWikiUrl(textView: TextView, cat: CatBreed) {
 }
 
 @BindingAdapter("sendDataFromFavoritesToDetail")
-fun sendDataFromFavoritesToDetail(view: ConstraintLayout, favoritesModel: FavoritesModel) {
+fun sendDataFromFavoritesToDetail(view: ConstraintLayout, catBreed: CatBreed) {
     view.setOnClickListener {
-        val action = FavoritesFragmentDirections.favoritesToDetail(favorites = favoritesModel)
+        val action = FavoritesFragmentDirections.favoritesToDetail(catBreed)
         view.findNavController().navigate(action)
     }
 }

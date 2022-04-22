@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.suatzengin.catbreeds.data.local.FavoritesModel" />
+            type="com.suatzengin.catbreeds.domain.model.CatBreed" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,7 +16,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:background="@drawable/item_background"
-        android:padding="4dp">
+        android:padding="4dp"
+        app:sendDataFromFavoritesToDetail="@{item}">
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/cat_image_favorite"
@@ -24,8 +25,8 @@
             android:layout_height="180dp"
             android:layout_margin="16dp"
             android:scaleType="centerCrop"
-            app:imageUrl="@{item.imageUrl}"
             android:src="@mipmap/ic_launcher"
+            app:imageUrl="@{item.imageUrl}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -40,8 +41,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="12dp"
-            android:textSize="20sp"
             android:text="@{item.name}"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cat_image_favorite"
             tools:text="Bengal kedisi" />

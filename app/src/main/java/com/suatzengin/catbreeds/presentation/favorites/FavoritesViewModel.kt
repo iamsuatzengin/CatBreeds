@@ -3,7 +3,7 @@ package com.suatzengin.catbreeds.presentation.favorites
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.suatzengin.catbreeds.common.Resource
-import com.suatzengin.catbreeds.data.local.FavoritesModel
+import com.suatzengin.catbreeds.domain.model.CatBreed
 import com.suatzengin.catbreeds.domain.use_case.favorites_use_case.DeleteUseCase
 import com.suatzengin.catbreeds.domain.use_case.favorites_use_case.GetByIdUseCase
 import com.suatzengin.catbreeds.domain.use_case.favorites_use_case.GetAllUseCase
@@ -63,13 +63,13 @@ class FavoritesViewModel @Inject constructor(
         }
     }
 
-    private fun addToFavorites(cat: FavoritesModel) {
+    private fun addToFavorites(cat: CatBreed) {
         viewModelScope.launch {
             insertUseCase.invoke(cat).collect {}
         }
     }
 
-    private fun deleteFromFavorites(cat: FavoritesModel) {
+    private fun deleteFromFavorites(cat: CatBreed) {
         viewModelScope.launch {
             deleteUseCase.invoke(cat).collect {}
         }
@@ -81,7 +81,7 @@ class FavoritesViewModel @Inject constructor(
         }
     }
 
-    fun isFavorited(cat: FavoritesModel): Boolean {
+    fun isFavorited(cat: CatBreed): Boolean {
         if (cat in _stateFavorites.value.favoriteList) {
             return true
         }

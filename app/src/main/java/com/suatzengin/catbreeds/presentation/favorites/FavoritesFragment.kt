@@ -13,8 +13,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.suatzengin.catbreeds.data.local.FavoritesModel
+
 import com.suatzengin.catbreeds.databinding.FragmentFavoritesBinding
+import com.suatzengin.catbreeds.domain.model.CatBreed
 import com.suatzengin.catbreeds.presentation.favorites.adapter.FavoritesAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -49,7 +50,7 @@ class FavoritesFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
     }
 
-    private fun deleteFromFavorites(deletedFavoriteItem: FavoritesModel) {
+    private fun deleteFromFavorites(deletedFavoriteItem: CatBreed) {
         val alertBuilder = AlertDialog.Builder(requireContext())
         alertBuilder
             .setTitle("Delete From Favorites!")
@@ -57,11 +58,10 @@ class FavoritesFragment : Fragment() {
             .setPositiveButton("Yes", DialogInterface.OnClickListener { _, _ ->
                 viewModel.handleEvent(FavoritesEvent.DeleteCatFromFavorites(deletedFavoriteItem))
                 viewModel.handleEvent(FavoritesEvent.GetAllFavorites)
+                //observeFavoriteList()
             })
             .setNegativeButton("No", null)
         alertBuilder.create().show()
-//        viewModel.handleEvent(FavoritesEvent.DeleteCatFromFavorites(deletedFavoriteItem))
-//        viewModel.handleEvent(FavoritesEvent.GetAllFavorites)
     }
 
     private fun observeFavoriteList() {
@@ -85,16 +85,14 @@ class FavoritesFragment : Fragment() {
         }
     }
 
-    private fun checkIfFavoritesEmpty(list: List<FavoritesModel>){
+    private fun checkIfFavoritesEmpty(list: List<CatBreed>){
         when(list.isEmpty()){
             true -> {
-
                 binding.ifEmptyDatabase.visibility = View.VISIBLE
                 binding.tvNoData.visibility = View.VISIBLE
                 adapter.submitList(list)
             }
             false -> {
-
                 binding.ifEmptyDatabase.visibility = View.GONE
                 binding.tvNoData.visibility = View.GONE
                 adapter.submitList(list)

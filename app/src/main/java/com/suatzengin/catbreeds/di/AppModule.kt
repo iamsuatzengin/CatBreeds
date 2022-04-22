@@ -69,8 +69,9 @@ object AppModule {
         return Room.databaseBuilder(
             context.applicationContext,
             FavoritesDatabase::class.java,
-            "favorites_cat_breeds_db"
-        ).build()
+            "favorites_cat_breeds_db")
+            .fallbackToDestructiveMigration()
+            .build()
     }
 
     @Provides
