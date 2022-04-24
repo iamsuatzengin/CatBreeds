@@ -18,6 +18,7 @@ import com.suatzengin.catbreeds.databinding.FragmentFavoritesBinding
 import com.suatzengin.catbreeds.domain.model.CatBreed
 import com.suatzengin.catbreeds.presentation.favorites.adapter.FavoritesAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 import kotlinx.coroutines.launch
 
 
@@ -48,6 +49,10 @@ class FavoritesFragment : Fragment() {
         val recyclerView = binding.rvFavorites
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.itemAnimator = SlideInUpAnimator().apply {
+            addDuration = 300
+            removeDuration = 100
+        }
     }
 
     private fun deleteFromFavorites(deletedFavoriteItem: CatBreed) {
@@ -58,7 +63,6 @@ class FavoritesFragment : Fragment() {
             .setPositiveButton("Yes", DialogInterface.OnClickListener { _, _ ->
                 viewModel.handleEvent(FavoritesEvent.DeleteCatFromFavorites(deletedFavoriteItem))
                 viewModel.handleEvent(FavoritesEvent.GetAllFavorites)
-                //observeFavoriteList()
             })
             .setNegativeButton("No", null)
         alertBuilder.create().show()

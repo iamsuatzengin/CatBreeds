@@ -26,5 +26,5 @@ class CatBreedsRepositoryImpl @Inject constructor(
 
     override fun getFavorites(): List<CatBreed> = dao.getFavorites()
 
-    override fun getFavoriteById(id: Int): CatBreed = dao.getFavoriteById(id)
+    override fun getFavoriteById(id: String): CatBreed = dao.getFavoriteById(id)
 }

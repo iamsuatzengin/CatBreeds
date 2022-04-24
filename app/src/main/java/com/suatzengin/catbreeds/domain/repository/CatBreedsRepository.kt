@@ -16,5 +16,5 @@ interface CatBreedsRepository {
 
     fun getFavorites(): List<CatBreed>
 
-    fun getFavoriteById(id: Int): CatBreed
+    fun getFavoriteById(id: String): CatBreed
 }

@@ -19,6 +19,7 @@ import com.suatzengin.catbreeds.presentation.cat_list.adapter.CatBreedListAdapte
 import com.suatzengin.catbreeds.presentation.favorites.FavoritesEvent
 import com.suatzengin.catbreeds.presentation.favorites.FavoritesViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -35,11 +36,7 @@ class CatBreedListFragment : Fragment(), SearchView.OnQueryTextListener {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentCatBreedListBinding.inflate(inflater, container, false)
-        adapter = CatBreedListAdapter( { cat ->
-            onClickFavoriteButton(cat)
-        }, { cat ->
-            onClickDeleteFavorite(cat)
-        })
+        adapter = CatBreedListAdapter(favoritesViewModel)
 
         setupRecyclerView()
         observeData()
@@ -49,15 +46,6 @@ class CatBreedListFragment : Fragment(), SearchView.OnQueryTextListener {
         return binding.root
     }
 
-    private fun onClickDeleteFavorite(cat: CatBreed) {
-        favoritesViewModel.handleEvent(FavoritesEvent.DeleteCatFromFavorites(cat))
-    }
-
-    private fun onClickFavoriteButton(cat: CatBreed) {
-        favoritesViewModel.handleEvent(FavoritesEvent.AddToFavorites(cat))
-        Toast.makeText(requireContext(), "eklendi ${cat.name}", Toast.LENGTH_SHORT).show()
-    }
-
     private fun searchCatBreed(catBreed: String) {
         // hatalı -> arama yapınca listedeki itemlerin resimleri gelmiyor.
         viewModel.searchCatBreed(catBreed)
@@ -65,18 +53,6 @@ class CatBreedListFragment : Fragment(), SearchView.OnQueryTextListener {
             adapter.submitList(it)
 
         })
-    }
-
-    private fun favorited(){
-        lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
-                favoritesViewModel.stateFavorites.collect{state ->
-                    state.favoriteList.let { list ->
-
-                    }
-                }
-            }
-        }
     }
 
     private fun observeData() {
@@ -105,6 +81,10 @@ class CatBreedListFragment : Fragment(), SearchView.OnQueryTextListener {
         val recyclerView = binding.rvCatBreeds
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.itemAnimator = SlideInUpAnimator().apply {
+            addDuration = 300
+            removeDuration = 100
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

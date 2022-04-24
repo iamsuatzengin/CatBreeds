@@ -4,10 +4,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.suatzengin.catbreeds.domain.model.CatBreed
-
+import com.suatzengin.catbreeds.presentation.favorites.FavoritesViewModel
+//private val onClickFav: (CatBreed) -> Unit,
+//    private val onClickDeleteFav: (CatBreed) -> Unit,
 class CatBreedListAdapter(
-    private val onClickFav: (CatBreed) -> Unit,
-    private val onClickDeleteFav: (CatBreed) -> Unit,
+    private val favoritesViewModel: FavoritesViewModel
 
 ): ListAdapter<CatBreed, CatBreedListViewHolder>(DiffCallBack) {
 
@@ -17,7 +18,7 @@ class CatBreedListAdapter(
 
     override fun onBindViewHolder(holder: CatBreedListViewHolder, position: Int) {
         val catBreed = getItem(position)
-        holder.bind(catBreed, onClickFav, onClickDeleteFav)
+        holder.bind(catBreed, favoritesViewModel)
     }
 
     companion object DiffCallBack : DiffUtil.ItemCallback<CatBreed>() {

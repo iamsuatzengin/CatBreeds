@@ -74,9 +74,14 @@ dependencies {
     implementation "com.google.dagger:hilt-android:2.38.1"
     kapt "com.google.dagger:hilt-compiler:2.38.1"
 
-    // rounded image view
+    // Rounded image view
     implementation 'com.makeramen:roundedimageview:2.3.0'
 
+    // RecyclerView animators
+    implementation 'jp.wasabeef:recyclerview-animators:4.0.2'
+
+    // Lottie animation
+    implementation "com.airbnb.android:lottie:5.0.3"
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

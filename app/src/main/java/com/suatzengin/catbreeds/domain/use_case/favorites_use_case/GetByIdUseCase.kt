@@ -10,7 +10,7 @@ class GetByIdUseCase @Inject constructor(
     private val repository: CatBreedsRepository
 ) {
 
-    operator fun invoke(id: Int) = flow {
+    operator fun invoke(id: String) = flow {
         try {
             emit(Resource.Loading())
             val getFavoriteById = repository.getFavoriteById(id)

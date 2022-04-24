@@ -16,5 +16,5 @@ interface FavoritesDao {
     fun getFavorites(): List<CatBreed>
 
     @Query("SELECT * FROM favorites WHERE id = :id")
-    fun getFavoriteById(id: Int): CatBreed
+    fun getFavoriteById(id: String): CatBreed
 }

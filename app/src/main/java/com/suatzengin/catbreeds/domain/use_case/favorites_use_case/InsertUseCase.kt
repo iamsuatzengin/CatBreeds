@@ -15,7 +15,7 @@ class InsertUseCase @Inject constructor(
     operator fun invoke(cat: CatBreed) = flow {
         try {
             emit(Resource.Loading())
-            val insertingCat = repository.insert(cat)
+            val insertingCat = repository.insert(cat.copy(isFavorited = true))
             emit(Resource.Success(insertingCat))
 
         } catch (e: Exception) {

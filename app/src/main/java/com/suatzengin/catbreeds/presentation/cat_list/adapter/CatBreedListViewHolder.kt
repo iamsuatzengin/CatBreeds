@@ -2,35 +2,31 @@ package com.suatzengin.catbreeds.presentation.cat_list.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.findViewTreeLifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.suatzengin.catbreeds.databinding.CatBreedsItemBinding
 import com.suatzengin.catbreeds.domain.model.CatBreed
+import com.suatzengin.catbreeds.presentation.favorites.FavoritesEvent
+import com.suatzengin.catbreeds.presentation.favorites.FavoritesViewModel
 
 class CatBreedListViewHolder(
     private val binding: CatBreedsItemBinding
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(
         catBreed: CatBreed,
-        onClickFav: (CatBreed) -> Unit,
-        onClickDeleteFav: (CatBreed) -> Unit,
-
+        viewModel: FavoritesViewModel
     ) {
         binding.catBreed = catBreed
 
-
         binding.favorite.apply {
-            setOnClickListener {
+            setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
-                    catBreed.isFavorited = true
-                    onClickFav(catBreed)
+                    viewModel.handleEvent(FavoritesEvent.AddToFavorites(catBreed))
                 } else {
-                    catBreed.isFavorited = false
-                    onClickDeleteFav(catBreed)
+                    viewModel.handleEvent(FavoritesEvent.DeleteCatFromFavorites(catBreed))
                 }
             }
         }
-
-
 
         binding.executePendingBindings()
     }
