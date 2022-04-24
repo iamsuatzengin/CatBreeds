@@ -1,7 +1,5 @@
 package com.suatzengin.catbreeds.presentation.favorites
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.suatzengin.catbreeds.common.Resource
@@ -80,12 +78,9 @@ class FavoritesViewModel @Inject constructor(
 
     private fun getFavoriteById(id: String) {
         viewModelScope.launch {
-            getFavoriteByIdUseCase.invoke(id).collect {
-
-            }
+            getFavoriteByIdUseCase.invoke(id).collect {}
         }
     }
-
 
     fun isFavorited(cat: CatBreed): Boolean {
         if (cat in _stateFavorites.value.favoriteList) {

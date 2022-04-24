@@ -14,9 +14,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.suatzengin.catbreeds.R
 import com.suatzengin.catbreeds.databinding.FragmentCatBreedListBinding
-import com.suatzengin.catbreeds.domain.model.CatBreed
 import com.suatzengin.catbreeds.presentation.cat_list.adapter.CatBreedListAdapter
-import com.suatzengin.catbreeds.presentation.favorites.FavoritesEvent
 import com.suatzengin.catbreeds.presentation.favorites.FavoritesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
@@ -47,11 +45,9 @@ class CatBreedListFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     private fun searchCatBreed(catBreed: String) {
-        // hatalı -> arama yapınca listedeki itemlerin resimleri gelmiyor.
         viewModel.searchCatBreed(catBreed)
         viewModel.searchState.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)
-
         })
     }
 
@@ -110,14 +106,14 @@ class CatBreedListFragment : Fragment(), SearchView.OnQueryTextListener {
 
     override fun onQueryTextSubmit(query: String?): Boolean {
         if (query != null) {
-            //searchCatBreed(query)
+            searchCatBreed(query)
         }
         return true
     }
 
     override fun onQueryTextChange(query: String?): Boolean {
         if (query != null) {
-            //searchCatBreed(query)
+            searchCatBreed(query)
         }
         return true
     }
